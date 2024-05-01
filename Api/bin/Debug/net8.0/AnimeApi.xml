@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AnimeApi</name>
+    </assembly>
+    <members>
+        <member name="M:AnimeController.GetAll(System.Int32,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Pegar Animes
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="diretor"></param>
+            <param name="nome"></param>
+            <param name="palavrasChave"></param>
+            <returns>Apresenta animes</returns>
+        </member>
+        <member name="M:AnimeController.GetById(System.Int32)">
+            <summary>
+            Pegar anime por Id
+            </summary>
+            <param name="id"></param>
+            <returns>Apresentar anime por id</returns>
+        </member>
+        <member name="M:AnimeController.Post(Anime)">
+            <summary>
+            Criar Anime
+            </summary>
+            <param name="model"></param>
+            <returns>Anime Criado</returns>
+        </member>
+        <member name="M:AnimeController.Put(System.Int32,Anime)">
+            <summary>
+            Editar Anime
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns>Anime editado</returns>
+        </member>
+        <member name="M:AnimeController.Delete(System.Int32)">
+            <summary>
+            Deletar anime
+            </summary>
+            <param name="id"></param>
+            <returns>Anime deletado</returns>
+        </member>
+        <member name="T:AnimeApi.Migrations.InitialMigrations">
+            <inheritdoc />
+        </member>
+        <member name="M:AnimeApi.Migrations.InitialMigrations.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AnimeApi.Migrations.InitialMigrations.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AnimeApi.Migrations.InitialMigrations.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:AnimeApi.Migrations.AtualizarAnime">
+            <inheritdoc />
+        </member>
+        <member name="M:AnimeApi.Migrations.AtualizarAnime.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AnimeApi.Migrations.AtualizarAnime.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AnimeApi.Migrations.AtualizarAnime.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="F:Autenticar._configuration">
+            <summary>
+            Autenticar Usuario na Api
+            </summary>
+            <returns>Apresentar Token de Autenticação</returns>
+        </member>
+    </members>
+</doc>
