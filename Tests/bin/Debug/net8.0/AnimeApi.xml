@@ -44,28 +44,28 @@
             <param name="id"></param>
             <returns>Anime deletado</returns>
         </member>
-        <member name="T:AnimeApi.Migrations.InitialMigrations">
+        <member name="T:AnimeApi.Migrations.AddEntitys">
             <inheritdoc />
         </member>
-        <member name="M:AnimeApi.Migrations.InitialMigrations.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:AnimeApi.Migrations.AddEntitys.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:AnimeApi.Migrations.InitialMigrations.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:AnimeApi.Migrations.AddEntitys.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:AnimeApi.Migrations.InitialMigrations.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:AnimeApi.Migrations.AddEntitys.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:AnimeApi.Migrations.AtualizarAnime">
+        <member name="T:AnimeApi.Migrations.RemoveLogevent">
             <inheritdoc />
         </member>
-        <member name="M:AnimeApi.Migrations.AtualizarAnime.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:AnimeApi.Migrations.RemoveLogevent.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:AnimeApi.Migrations.AtualizarAnime.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:AnimeApi.Migrations.RemoveLogevent.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:AnimeApi.Migrations.AtualizarAnime.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:AnimeApi.Migrations.RemoveLogevent.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="F:Autenticar._configuration">

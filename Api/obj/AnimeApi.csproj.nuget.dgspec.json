@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rsouz\\src\\src\\AnimeApi.csproj": {}
+    "C:\\Users\\rsouz\\anime\\Api\\AnimeApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rsouz\\src\\src\\AnimeApi.csproj": {
+    "C:\\Users\\rsouz\\anime\\Api\\AnimeApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rsouz\\src\\src\\AnimeApi.csproj",
+        "projectUniqueName": "C:\\Users\\rsouz\\anime\\Api\\AnimeApi.csproj",
         "projectName": "AnimeApi",
-        "projectPath": "C:\\Users\\rsouz\\src\\src\\AnimeApi.csproj",
+        "projectPath": "C:\\Users\\rsouz\\anime\\Api\\AnimeApi.csproj",
         "packagesPath": "C:\\Users\\rsouz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rsouz\\src\\src\\obj\\",
+        "outputPath": "C:\\Users\\rsouz\\anime\\Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rsouz\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,7 +46,11 @@
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.4, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.2.0, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -54,7 +58,13 @@
               "target": "Package",
               "version": "[8.0.4, )"
             },
-            "Microsoft.EntityFrameworkCore.SQLite": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.4, )"
             },
@@ -62,9 +72,41 @@
               "target": "Package",
               "version": "[4.20.70, )"
             },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.2-dev-00338, )"
+            },
+            "Serilog.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Serilog.Settings.Configuration": {
+              "target": "Package",
+              "version": "[8.0.1-dev-00582, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[5.1.0-dev-00943, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[5.0.1-dev-00972, )"
+            },
+            "Serilog.Sinks.MSSqlServer": {
+              "target": "Package",
+              "version": "[6.6.0, )"
+            },
+            "Serilog.Sinks.SQLite": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.6, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",

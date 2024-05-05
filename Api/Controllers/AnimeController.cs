@@ -1,19 +1,19 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-
 
 [ApiController]
 [Route("api")]
 [Authorize]
 public class AnimeController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly ApplicationDbContext _context;
+    private readonly ILogger<AnimeController> _logger;
 
-    public AnimeController(AppDbContext context)
+    public AnimeController(ApplicationDbContext context, ILogger<AnimeController> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     /// <summary>
@@ -28,42 +28,53 @@ public class AnimeController : ControllerBase
     [HttpGet("animes")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll(
-    [FromQuery] int page = 1,
-    [FromQuery] int pageSize = 10,
-    [FromQuery] string diretor = null,
-    [FromQuery] string nome = null,
-    [FromQuery] string palavrasChave = null)
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10,
+        [FromQuery] string diretor = null,
+        [FromQuery] string nome = null,
+        [FromQuery] string palavrasChave = null)
     {
-        IQueryable<Anime> query = _context.Animes.AsNoTracking();
-
-        if (!string.IsNullOrEmpty(diretor))
+        try
         {
-            query = query.Where(a => a.Diretor != null && a.Diretor.Contains(diretor));
+            IQueryable<Anime> query = _context.Animes.AsNoTracking();
+
+            if (!string.IsNullOrEmpty(diretor))
+            {
+                query = query.Where(a => a.Diretor != null && a.Diretor.Contains(diretor));
+            }
+
+            if (!string.IsNullOrEmpty(nome))
+            {
+                query = query.Where(a => a.Name != null && a.Name.Contains(nome));
+            }
+
+            if (!string.IsNullOrEmpty(palavrasChave))
+            {
+                query = query.Where(a => a.Resumo != null && a.Resumo.Contains(palavrasChave));
+            }
+
+            var totalItems = await query.CountAsync();
+
+            var animes = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            var response = new
+            {
+                TotalItems = totalItems,
+                Page = page,
+                PageSize = pageSize,
+                Animes = animes
+            };
+
+            _logger.LogInformation("Consulta de animes bem-sucedida");
+
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao buscar animes");
+            return StatusCode(StatusCodes.Status500InternalServerError, "Erro interno do servidor");
         }
 
-        if (!string.IsNullOrEmpty(nome))
-        {
-            query = query.Where(a => a.Nome != null && a.Nome.Contains(nome));
-        }
-
-        if (!string.IsNullOrEmpty(palavrasChave))
-        {
-            query = query.Where(a => a.Resumo != null && a.Resumo.Contains(palavrasChave));
-        }
-
-        var totalItems = await query.CountAsync();
-
-        var animes = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-
-        var response = new
-        {
-            TotalItems = totalItems,
-            Page = page,
-            PageSize = pageSize,
-            Animes = animes
-        };
-
-        return Ok(response);
     }
     /// <summary>
     /// Pegar anime por Id
@@ -76,7 +87,17 @@ public class AnimeController : ControllerBase
     public async Task<IActionResult> GetById(int id)
     {
         var anime = await _context.Animes.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-        return anime == null ? NotFound() : Ok(anime);
+
+        if (anime == null)
+        {
+            _logger.LogInformation("Consulta por Id não encontrada: {AnimeId}", id);
+            return NotFound();
+        }
+        else
+        {
+            _logger.LogInformation("Consulta por Id bem-sucedida: {AnimeId}", id);
+            return Ok(anime);
+        }
     }
 
     /// <summary>
@@ -93,7 +114,7 @@ public class AnimeController : ControllerBase
 
         var anime = new Anime
         {
-            Nome = model.Nome,
+            Name = model.Name,
             Resumo = model.Resumo,
             Diretor = model.Diretor,
         };
@@ -102,11 +123,16 @@ public class AnimeController : ControllerBase
         {
             await _context.Animes.AddAsync(anime);
             await _context.SaveChangesAsync();
+            
+            _logger.LogInformation("Anime criado com sucesso: {AnimeId}", anime.Id);
+            
             return Created($"api/CriarAnime/{anime.Id}", anime);
         }
-        catch
+        catch (DbUpdateException ex)
         {
-            return StatusCode(500);
+            _logger.LogError(ex, "Erro ao criar anime");
+
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 
@@ -131,17 +157,22 @@ public class AnimeController : ControllerBase
 
         try
         {
-            anime.Nome = model.Nome;
+            anime.Name = model.Name;
             anime.Resumo = model.Resumo;
             anime.Diretor = model.Diretor;
 
             _context.Animes.Update(anime);
             await _context.SaveChangesAsync();
-            return NoContent(); // 204 No Content
+            
+            _logger.LogInformation("Anime editado com sucesso: {AnimeId}", id);
+            
+            return NoContent();
         }
-        catch
+        catch (Exception ex)
         {
-            return StatusCode(500);
+            _logger.LogError(ex, "Erro ao editar anime: {AnimeId}", id);
+
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 
@@ -164,12 +195,18 @@ public class AnimeController : ControllerBase
         {
             _context.Animes.Remove(anime);
             await _context.SaveChangesAsync();
-
-            return NoContent(); // 204 No Content
+            
+            _logger.LogInformation("Anime deletado com sucesso: {AnimeId}", id);
+            
+            return NoContent();
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            return StatusCode(500);
+            _logger.LogError(ex, "Erro ao deletar anime: {AnimeId}", id);
+
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 }
+
+
